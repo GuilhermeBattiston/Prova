@@ -1,5 +1,4 @@
 <?php 
-
     session_start();
 
     abstract class Robo{
@@ -9,73 +8,117 @@
         public $potencia
         public $contador
 
-        function __constructor(){
-            $this->nome = "",
-            $this->energia = 0,
-            $this->potencia = 0,
-            $this->contador = 0
+        function __constructor($nome, $energia, $potencia, $modelo, $contador){
+            $this->nome = $nome,
+            $this->energia = $energia,
+            $this->potencia = $potencia,
+            $this->contador = $contador,
+            $this->modelo = $modelo
         }
 
-        abstract function operar()
+        abstract public function operar()
 
-        abstract function exibirStatus(){
+        abstract public function exibirStatus(){
             return $modelo && $energia && $potencia;
         }
 
-        abstract function recarregar(){
+        abstract public function recarregar(){
             $this->energia += 10;
             return $energia
         }
-    }
 
-    class Explorador{
-        public function operar(){
-            echo "O planeta foi investigado";
-        }
-        public function exibirStatus(){
-            return $modelo && $energia && $potencia;
-        }
-        public function recarregar(){
-            $this->energia += 10;
-            $this->contador += 1;
+        public function getEnergia(){
             return $energia
         }
-    }
 
-    class Engenheiro{
-        public function operar(){
-            echo "Equipamentos foram reparados";
-        }
-        public function exibirStatus(){
-            return $modelo && $energia && $potencia;
-        }
-        public function recarregar(){
-            $this->energia += 10;
-            $this->contador += 1;
-            return $energia
+        public function setEnergia(){
+            $this->energia = $energia
         }
     }
 
-    class Defensor{
-        public function operar(){
-            echo "Defesas preparadas"
-        }
-        public function exibirStatus(){
-            return $modelo && $energia && $potencia;
-        }
-        public function recarregar(){
-            $this->energia += 10;
-            $this->contador += 1;
-            return $energia
-        }
-    }
-
-    $robo = new Defensor(150,20)
-    $robo = new Engenheiro(120,15)
-    $robo = new Explorador(100,20)
-    htmlspecialchars(
+    class Explorador extends Robo{
         
-    )
+        public function operar(){
+            getEnergia()
+            if ($energia >= 20){
+                $this->energia = $energia - 20;
+                echo "Equipamentos foram reparados";
+            }
+            else {
+                echo "Você está sem energia"
+            }
+        }
+        public function exibirStatus(){
+            return $modelo && $energia && $potencia;
+        }
+        public function recarregar(){
+            if ($energia < 200){
+                $this->energia = $energia + 10;
+                $this->contador += 1;
+                return $energia
+            }
+            else {
+                echo "Energia no máximo"
+            }
+        }
+    }
+
+    class Engenheiro extends Robo{
+        
+        public function operar(){
+            getEnergia()
+            if ($energia >= 20){
+                $this->energia = $energia - 20;
+                echo "Equipamentos foram reparados";
+            }
+            else {
+                echo "Você está sem energia"
+            }
+        }
+        public function exibirStatus(){
+            return $modelo && $energia && $potencia;
+        }
+        public function recarregar(){
+            if ($energia < 200){
+                $this->energia = $energia + 10;
+                $this->contador += 1;
+                return $energia
+            }
+            else {
+                echo "Energia no máximo"
+            }
+        }
+    }
+
+    class Defensor extends Robo{
+            
+        public function operar(){
+            getEnergia()
+            if ($energia >= 20){
+                $this->energia = $energia - 20;
+                echo "Equipamentos foram reparados";
+            }
+            else {
+                echo "Você está sem energia"
+            }
+        }
+        public function exibirStatus(){
+            return $modelo && $energia && $potencia;
+        }
+        public function recarregar(){
+            if ($energia < 200){
+                $this->energia = $energia + 10;
+                $this->contador += 1;
+                return $energia
+            }
+            else {
+                echo "Energia no máximo"
+            }
+        }
+    }
+    $explorador = new Explorador("Robo 1",100, 20, "Engenheiro", 0)
+    $engenheiro = new Engenheiro("Robo 2",120, 15, "Engenheiro", 0)
+    $defensor = new Defensor("Robo 3",150, 30, "Defensor", 0)
 
     if($_SERVER['REQUEST_METOD'] === $_POST){
         if ($nome = "" ??, ||
@@ -108,8 +151,6 @@
             <h1>Cadastro de Robôs</h1>
         </label>
     </div>
-    <div class = container>
-        <button type = action id = >Recarregar</button>
-    </div>
+    <button type = increment>Aumentar energia</button>
 </body>
 </html>
