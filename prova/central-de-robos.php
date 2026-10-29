@@ -77,13 +77,20 @@
         
     )
 
-    if($_SERVER === $_POST){
-        if ($nome = "" ?? ||
+    if($_SERVER['REQUEST_METOD'] === $_POST){
+        if ($nome = "" ??, ||
         $potencia >= 15 ||
         $energia >= 100){
-            if ($robo = class Defensor){
-                
+            if ($robo = class Explorador){
+                operar()
+            } elseif ($robo = class Engenheiro){
+                operar()
+            } elseif ($robo = class Defensor){
+                operar()
             }
+        }
+        else{
+            echo "Preencha os campos corretamente"
         }
     }
 ?>
@@ -93,12 +100,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/prova/central-de-robos.css">
 </head>
 <body>
     <div class = container>
         <label for="maquina">
-            <h1>Cadastro de Máquinas</h1>
+            <h1>Cadastro de Robôs</h1>
         </label>
+    </div>
+    <div class = container>
+        <button type = action id = >Recarregar</button>
     </div>
 </body>
 </html>
